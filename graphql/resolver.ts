@@ -10,8 +10,8 @@ const resolvers = {
 
         return usuarios;
         }
-
     },
+
     Mutation: {
         crearUsuario: async (parent, args) =>{
             const usuarioCreado = await UserModel.create({
