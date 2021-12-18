@@ -18,13 +18,13 @@ enum Enum_Rol{
 }
 
 type Usuario{ #el ! es para campos required
-# GraphQl exige el ID en mayuscula que a su vez significa que  llave primaria
+# GraphQl exige el ID en mayuscula que a su vez significa que es llave primaria
     _id: ID!
     nombre: String!
     apellido: String!
     identificacion: String!
     correo: String!
-    estado: Enum_EstadoUsuario!
+    estado: Enum_EstadoUsuario
     rol: Enum_Rol!
     
  }
@@ -33,6 +33,7 @@ type Usuario{ #el ! es para campos required
  type Query{
     #  el Usuarios es el mismo nombre del resolver y decimos que ese query devuelve un arreglo de usuarios del tipo arriba definido
      Usuarios:[Usuario]
+     Usuario(_id:String!):Usuario
  }
 
  type Mutation{
@@ -42,9 +43,25 @@ type Usuario{ #el ! es para campos required
         apellido: String!
         identificacion: String!
         correo: String!
-        estado: Enum_EstadoUsuario!
+        estado: Enum_EstadoUsuario
         rol: Enum_Rol!
      ):Usuario
+
+     editarUsuario(
+        #  con el _id busco el usuario a editar
+         _id: String! 
+        #  los demas campos los pido para  editarlos
+        nombre: String!
+        apellido: String!
+        identificacion: String!
+        correo: String!
+        rol: Enum_Rol!
+        estado: Enum_EstadoUsuario!
+     ):Usuario
+
+     eliminarUsuario(_id:String, correo:String):Usuario
+
+    
  }
 `;
 

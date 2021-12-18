@@ -1,0 +1,67 @@
+
+# QUERYS
+
+query Usuarios($id: String!) {
+  Usuario(_id: $id) {
+    nombre
+    apellido
+    correo
+  }
+}
+# --variable
+{
+  "id": "61be14810b5cc3838ad66da5"
+}
+
+
+
+
+query Usuarios{
+  Usuarios {
+    _id
+    nombre 
+    rol
+    estado
+    identificacion
+    correo
+  }
+}
+query Usuario {
+  Usuario (
+    _id:"61be149b0b5cc3838ad66da7"
+  ) {
+    nombre
+    apellido
+    
+  }
+  
+}
+
+# MUTATIONS
+
+mutation {
+  crearUsuario(
+    nombre: "Prueba graphQl 6"
+    apellido: "Mutación 6" 
+    identificacion: "5652987456"
+    correo: "66graphql@gql.com"
+    rol: LIDER
+    estado:NO_AUTORIZADO
+
+){
+    _id
+    nombre
+    apellido
+    identificacion
+    rol
+  }
+}
+
+
+mutation EliminarUsuario {
+  eliminarUsuario(_id: "61be14810b5cc3838ad66da5") {
+    _id
+    nombre
+  }
+}
+
