@@ -8,7 +8,6 @@ const resolvers = {
     Query: {
         Usuarios: async (parent, args) => {
             const usuarios = await UserModel.find();
-
             return usuarios;
         },
         Usuario: async (parant, args)=>{
@@ -17,7 +16,8 @@ const resolvers = {
         },
         // paso 3 proyecto
         Proyectos: async (parent, args)=>{
-            const proyectos= ProjectModel
+            const proyectos= await ProjectModel.find();
+            return proyectos;
         }
 
     },

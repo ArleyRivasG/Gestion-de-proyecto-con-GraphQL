@@ -7,7 +7,7 @@ import { ObjectId } from 'mongoose';
 import { ObjetiveModel } from './models/objective';
 
 //METODOLOGÍA ONE TO MANY #1
-const crearProyectoConObjetivos = async () =>{
+const crearProyectoConObjetivosold = async () =>{
     const proyectoCreado = await ProjectModel.create({
         nombre: 'Proyecto mintic 2022',
         fechaInicio: new Date('2021/11/01'),
@@ -19,17 +19,17 @@ const crearProyectoConObjetivos = async () =>{
 
     const objetivoGeneral = await ObjetiveModel.create({
         descripcion:' Este es el objetivo general',
-        tipo: Enum_TipoObjetivo.general,
+        tipo: Enum_TipoObjetivo.GENERAL,
         proyecto: proyectoCreado._id,
     });
     const objetivoEspecifico1 = await ObjetiveModel.create({
         descripcion:' Este es el objetivo especifico 1',
-        tipo: Enum_TipoObjetivo.especifico,
+        tipo: Enum_TipoObjetivo.ESPECIFICO,
         proyecto: proyectoCreado._id,
     });
     const objetivoEspecifico2 = await ObjetiveModel.create({
         descripcion:' Este es el objetivo especifico 2',
-        tipo: Enum_TipoObjetivo.especifico,
+        tipo: Enum_TipoObjetivo.ESPECIFICO,
         proyecto: proyectoCreado._id,
     });
     console.log('El proyecto creado con sus objetivos es: ', proyectoCreado);
@@ -56,23 +56,23 @@ const crearProyectoConObjetivos2 = async () => {
         apellido: 'Granado 2',
         correo: "carmeng@unip.com.co",
         identificacion: '1444156416',
-        rol: Enum_Rol.lider,
-        estado: Enum_EstadoUsuario.autorizado,
+        rol: Enum_Rol.LIDER,
+        estado: Enum_EstadoUsuario.AUTORIZADO,
     }); 
 
  const objetivoGeneral = await ObjetiveModel.create({
     descripcion:' Este es el objetivo general',
-    tipo: Enum_TipoObjetivo.general,
+    tipo: Enum_TipoObjetivo.GENERAL,
    
 });
 const objetivoEspecifico1 = await ObjetiveModel.create({
     descripcion:' Este es el objetivo especifico 1',
-    tipo: Enum_TipoObjetivo.especifico,
+    tipo: Enum_TipoObjetivo.ESPECIFICO,
   
 });
 const objetivoEspecifico2 = await ObjetiveModel.create({
     descripcion:' Este es el objetivo especifico 2',
-    tipo: Enum_TipoObjetivo.especifico,
+    tipo: Enum_TipoObjetivo.ESPECIFICO,
    
 });
 
@@ -99,33 +99,33 @@ const consultaProyectoConObjetivos2= async () => {
 
 
 //METODOLOGÍA 'ONE TO MANY' #3
-const crearProyectoConObjetivos3 = async () =>{
+const crearProyectoConObjetivos = async () =>{
 
 const usuarioInicial = await UserModel.create({
     nombre: 'Marcelo',
     apellido: 'Rivas',
     correo: "marce@unip.com.co",
     identificacion: '333444156416',
-    rol: Enum_Rol.lider,
-    estado: Enum_EstadoUsuario.autorizado,
+    rol: Enum_Rol.LIDER,
+    estado: Enum_EstadoUsuario.AUTORIZADO,
 });
 
-const proyectoCreado = await ProjectModel3.create({
+const proyectoCreado = await ProjectModel.create({
     nombre: 'Proyecto mintic 2022',
     fechaInicio: new Date('2021/11/01'),
     fechaFin: new Date ('2022/12/01'),
     presupuesto: 12000000,
     lider: usuarioInicial._id,
     objetivos:[
-        {descripcion: 'Este es el objetivo general', tipo: Enum_TipoObjetivo.general},
-        {descripcion: 'Este es el objetivo especifico 1', tipo: Enum_TipoObjetivo.especifico},
-        {descripcion: 'Este es el objetivo especifico 2', tipo: Enum_TipoObjetivo.especifico},
+        {descripcion: 'Este es el objetivo general', tipo: Enum_TipoObjetivo.GENERAL},
+        {descripcion: 'Este es el objetivo especifico 1', tipo: Enum_TipoObjetivo.ESPECIFICO},
+        {descripcion: 'Este es el objetivo especifico 2', tipo: Enum_TipoObjetivo.ESPECIFICO},
     ],
 });
 }
 
-const consultaProyectosConObjetivos3 = async () =>{
-    const proyectoCreado = await ProjectModel3.find({id:'61bc239fdb1382733886ad29'});
+const consultaProyectosConObjetivos = async () =>{
+    const proyectoCreado = await ProjectModel.find({id:'61bc239fdb1382733886ad29'});
     console.log('proyecto encontrado es: ', JSON.stringify(proyectoCreado));
 }
 

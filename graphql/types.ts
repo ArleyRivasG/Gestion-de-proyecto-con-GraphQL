@@ -5,7 +5,7 @@ import { gql } from 'apollo-server-express';
 
 const typeDefs = gql`
 
-scalar Date;
+scalar Date
 
 enum Enum_EstadoUsuario{
     PENDIENTE
@@ -31,7 +31,7 @@ enum Enum_FaseProyecto {
 }
 
 enum Enum_TipoObjetivo {
-   GENERAL 
+    GENERAL 
     ESPECIFICO 
 }
 
@@ -48,20 +48,20 @@ type Usuario{ #el ! es para campos required
  }
 
 # paso 1 Proyecto
+type objetivo{
+    descripcion:String!
+    tipo:Enum_TipoObjetivo!
+}
 type Proyecto {
     _id: ID!
     nombre: String!
-    presupuesto: float!
+    presupuesto: Float!
     fechaInicio:Date!
     fechaFin: Date!
     estado: Enum_EstadoProyecto!
     fase: Enum_FaseProyecto!
     lider: Usuario!
-    objetivos:{
-        {descripcion:String!, tipo:Enum_TipoObjetivo!}
-
-    }
-
+    objetivos:[objetivo]
 }
 #Definimos los tipos de los Querys de las mutaciones  
  type Query{
@@ -69,7 +69,7 @@ type Proyecto {
      Usuarios:[Usuario]
      Usuario(_id:String!):Usuario
     #  paso 2 Proyecto 
-     Proyectos[Proyectos]
+     Proyectos:[Proyecto]
  }
 
  type Mutation{
