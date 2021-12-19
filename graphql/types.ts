@@ -5,6 +5,8 @@ import { gql } from 'apollo-server-express';
 
 const typeDefs = gql`
 
+scalar Date;
+
 enum Enum_EstadoUsuario{
     PENDIENTE
     AUTORIZADO
@@ -15,6 +17,22 @@ enum Enum_Rol{
     ESTUDIANTE
     LIDER
     ADMINISTRADOR
+}
+enum Enum_EstadoProyecto {
+    ACTIVO 
+    INACTIVO 
+}
+
+enum Enum_FaseProyecto {
+    INICIADO 
+    DESARROLLO 
+    TERMINADO
+    NULO
+}
+
+enum Enum_TipoObjetivo {
+   GENERAL 
+    ESPECIFICO 
 }
 
 type Usuario{ #el ! es para campos required
@@ -29,11 +47,29 @@ type Usuario{ #el ! es para campos required
     
  }
 
+# paso 1 Proyecto
+type Proyecto {
+    _id: ID!
+    nombre: String!
+    presupuesto: float!
+    fechaInicio:Date!
+    fechaFin: Date!
+    estado: Enum_EstadoProyecto!
+    fase: Enum_FaseProyecto!
+    lider: Usuario!
+    objetivos:{
+        {descripcion:String!, tipo:Enum_TipoObjetivo!}
+
+    }
+
+}
 #Definimos los tipos de los Querys de las mutaciones  
  type Query{
     #  el Usuarios es el mismo nombre del resolver y decimos que ese query devuelve un arreglo de usuarios del tipo arriba definido
      Usuarios:[Usuario]
      Usuario(_id:String!):Usuario
+    #  paso 2 Proyecto 
+     Proyectos[Proyectos]
  }
 
  type Mutation{

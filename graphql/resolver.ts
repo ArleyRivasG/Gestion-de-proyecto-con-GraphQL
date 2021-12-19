@@ -1,6 +1,7 @@
 // Los resolver es como ejecuta esa instrucción o cuale es la función que se ejecuta por dentro
 //aqui es como si estuviesemos haciendo los controladores
 
+import { ProjectModel } from "../models/project";
 import { UserModel } from "../models/user";
 
 const resolvers = {
@@ -13,7 +14,12 @@ const resolvers = {
         Usuario: async (parant, args)=>{
             const usuario = await UserModel.findOne({_id: args._id});        
             return usuario;
-        } 
+        },
+        // paso 3 proyecto
+        Proyectos: async (parent, args)=>{
+            const proyectos= ProjectModel
+        }
+
     },
 
     Mutation: {

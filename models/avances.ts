@@ -1,5 +1,5 @@
 import { Schema, model } from 'mongoose';
-import { ProjectModel3 } from './project3';
+import { ProjectModel3 } from './project';
 import { UserModel } from './user';
 interface Avance {
     protecto: Schema.Types.ObjectId,

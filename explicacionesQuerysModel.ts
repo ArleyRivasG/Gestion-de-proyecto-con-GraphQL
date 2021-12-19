@@ -1,8 +1,7 @@
 import conectarBD from './db/db';
 import { UserModel } from './models/user';
 import { Enum_EstadoUsuario, Enum_Rol, Enum_TipoObjetivo } from './models/enums';
-import { ProjectModel3} from './models/project3';
-import { ProjectModel} from './models/project2';
+import { ProjectModel} from './models/project';
 import { isPropertyDeclaration } from 'typescript';
 import { ObjectId } from 'mongoose';
 import { ObjetiveModel } from './models/objective';
