@@ -42,12 +42,18 @@ query Proyectos {
     estado
     _id
     lider{
+      _id
       nombre
       apellido
       identificacion
       correo
       estado
+     
+    }
+    objetivos {
       _id
+      descripcion
+      tipo
     }
   }
 }
