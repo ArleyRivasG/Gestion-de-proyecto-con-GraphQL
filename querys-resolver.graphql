@@ -1,0 +1,151 @@
+
+# QUERYS
+
+query Usuarios($id: String!) {
+  Usuario(_id: $id) {
+    nombre
+    apellido
+    correo
+  }
+}
+# --variable
+{
+  "id": "61be14810b5cc3838ad66da5"
+}
+
+
+
+
+query Usuarios{
+  Usuarios {
+    _id
+    nombre 
+    rol
+    estado
+    identificacion
+    correo
+  }
+}
+query Usuario {
+  Usuario (
+    _id:"61be149b0b5cc3838ad66da7"
+  ) {
+    nombre
+    apellido
+    
+  }
+  
+}
+query Proyectos {
+  Proyectos {
+    
+    estado
+    _id
+    lider{
+      _id
+      nombre
+      apellido
+      identificacion
+      correo
+      estado
+     
+    }
+    objetivos {
+      _id
+      descripcion
+      tipo
+    }
+  }
+}
+
+# MUTATIONS
+
+mutation {
+  crearUsuario(
+    nombre: "Prueba graphQl 6"
+    apellido: "Mutación 6" 
+    identificacion: "5652987456"
+    correo: "66graphql@gql.com"
+    rol: LIDER
+    estado:NO_AUTORIZADO
+
+){
+    _id
+    nombre
+    apellido
+    identificacion
+    rol
+  }
+}
+
+
+mutation EliminarUsuario {
+  eliminarUsuario(_id: "61be14810b5cc3838ad66da5") {
+    _id
+    nombre
+  }
+}
+
+# mutacion con proyectos quemados en el resolver
+mutation  {
+  crearProyecto (
+    nombre: "Proyecto GQL 2"
+    estado: ACTIVO
+    presupuesto: 154104
+    fechaInicio: "2021-01-01"
+    fechaFin: "2020-05-31"
+    fase: DESARROLLO
+    lider: "61bc239edb1382733886ad24"    
+  ){
+    nombre
+    estado
+    presupuesto
+    lider{
+      nombre
+      apellido
+    }
+  }
+}
+
+# mutacion con proyectos
+mutation{
+  crearProyecto(
+    nombre: "Proyecto con objetivos "
+    estado: ACTIVO
+    fase: INICIADO
+    fechaInicio: "2021/08/01"
+    fechaFin: "2021/12/01"
+    presupuesto: 5000000
+    lider: "61bc239edb1382733886ad24"
+    objetivos: [
+      {
+        descripcion: "Objetivo general del proyecto "
+        tipo: GENERAL
+      },
+      {
+        descripcion: "Objetivo especifico 1 del proyecto "
+        tipo: ESPECIFICO
+      },
+      {
+        descripcion: "Objetivo especifico 2 del proyecto "
+        tipo: ESPECIFICO
+      },
+      {
+        descripcion: "Objetivo especifico 3 del proyecto "
+        tipo: ESPECIFICO
+      }
+
+      }
+    ]
+  ){
+    _id
+    nombre
+    objetivos{
+      _id
+      descripcion
+      tipo
+    }
+
+
+  }
+}

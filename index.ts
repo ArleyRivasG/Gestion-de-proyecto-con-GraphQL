@@ -1,31 +1,43 @@
+import express from 'express';
+import cors from 'cors';
+import { ApolloServer } from 'apollo-server-express';
+import dotenv from 'dotenv';
 import conectarBD from './db/db';
-import { UserModel } from './models/user';
-import { Enum_Rol } from './models/enums';
+import { typeDefs } from './graphql/types';
+import {resolvers} from './graphql/resolver';
 
-const main = async () => {
+dotenv.config();
+
+//Definimos un servidor de Apollo Server
+const server = new ApolloServer({
+
+    //pasamos los Tipos que es  cada una de las definiciones que tiene nuestro modelo
+    //y las propiedades resolvers (reemplaza a los controladores en Api Rest) 
+    typeDefs: typeDefs,
+    resolvers: resolvers,
+});
+
+//definimos aplicacion de express
+const app = express();
+
+//usamos el middleware express.json para permitir que los request entre y salgan de tipo JSON
+app.use(express.json());
+
+//utilizamos el middleware del cors para poder hacer request desde muchos origenes
+app.use(cors());
+
+//corremos nuestra aplicacion de express (servidor)
+app.listen({ port: process.env.PORT || 4000 }, async () => {
+
+    //nos conectamos a la BD
     await conectarBD();
-    // CREAR UN USUARIO
-    await UserModel.create({
-        correo:"arri@uni.com",
-        identificacion:'56416',
-        nombre:'wilbert',
-        apellido:'Rivas Granado',
-        rol:Enum_Rol.administrador,
-    })
-    .then((u)=>{
-        console.log('usuario creado ', u);
-    }).catch((e)=>{
-        console.log('error creado el usuario ', e);
-    });
 
-    //OBTENER LOS USUARIOS
-    await UserModel.find({identificacion:'1111807577'}) //busqueda especifica
-        .then((u)=>{
-            console.log('usuario' , u);
-        })
-        .catch((e)=>{
-            console.error('error obteniendo los usuarios', e);
-        });
-};
+    //prendemos el servidor de apollo para poder generar esa unica ruta en el backend y acceder a nuestra aplicacion
+    await server.start();
 
-main();
+    // agregamos middleware adicionales al servidor de apollo, en este caso los de express para usarlos como siempre con express
+    server.applyMiddleware({ app });
+
+    console.log('servidor listo');
+
+});
