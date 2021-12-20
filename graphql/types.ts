@@ -48,7 +48,8 @@ type Usuario{ #el ! es para campos required
  }
 
 # paso 1 Proyecto
-type objetivo{
+type objetivos{
+    _id: ID!
     descripcion:String!
     tipo:Enum_TipoObjetivo!
 }
@@ -61,7 +62,7 @@ type Proyecto {
     estado: Enum_EstadoProyecto!
     fase: Enum_FaseProyecto!
     lider: Usuario!
-    objetivos:[objetivo]
+    objetivos:[objetivos]
 }
 #Definimos los tipos de los Querys de las mutaciones  
  type Query{
@@ -96,6 +97,19 @@ type Proyecto {
      ):Usuario
 
      eliminarUsuario(_id:String, correo:String):Usuario
+
+     crearProyecto(
+         nombre:String!
+         presupuesto:Float!
+         fechaInicio: Date!
+         fechaFin:Date!
+         estado:Enum_EstadoProyecto!
+         fase:Enum_FaseProyecto!
+        # El String hace referencia al ID  de un usuario que 
+        # ya debe estar creado y el mongoose lo vuelte al ObjectID de Usuario
+         lider:String!
+        #  objetivos:String
+     ):Proyecto
 
     
  }

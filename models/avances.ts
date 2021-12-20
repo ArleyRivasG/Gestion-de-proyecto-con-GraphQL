@@ -1,5 +1,5 @@
 import { Schema, model } from 'mongoose';
-import { ProjectModel3 } from './project';
+import { ProjectModel} from './project';
 import { UserModel } from './user';
 interface Avance {
     protecto: Schema.Types.ObjectId,
@@ -25,19 +25,19 @@ const advancementSchema = new Schema<Avance>({
             type: String
         },
     ],
-    protecto:{
+    protecto: {
         type: Schema.Types.ObjectId,
-        ref: ProjectModel3,
-        required:true,
+        ref: ProjectModel,
+        required: true,
     },
-    creadoPor:{
-        type:Schema.Types.ObjectId,
+    creadoPor: {
+        type: Schema.Types.ObjectId,
         ref: UserModel,
-        required:true,
+        required: true,
     },
 
 })
 
-const AdvancementModel = model ('avance', advancementSchema );
+const AdvancementModel = model('avance', advancementSchema);
 
-export {AdvancementModel}
+export { AdvancementModel }

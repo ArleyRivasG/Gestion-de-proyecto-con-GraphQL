@@ -36,6 +36,21 @@ query Usuario {
   }
   
 }
+query Proyectos {
+  Proyectos {
+    
+    estado
+    _id
+    lider{
+      nombre
+      apellido
+      identificacion
+      correo
+      estado
+      _id
+    }
+  }
+}
 
 # MUTATIONS
 
@@ -65,3 +80,23 @@ mutation EliminarUsuario {
   }
 }
 
+
+mutation  {
+  crearProyecto (
+    nombre: "Proyecto GQL 2"
+    estado: ACTIVO
+    presupuesto: 154104
+    fechaInicio: "2021-01-01"
+    fechaFin: "2020-05-31"
+    fase: DESARROLLO
+    lider: "61bc239edb1382733886ad24"    
+  ){
+    nombre
+    estado
+    presupuesto
+    lider{
+      nombre
+      apellido
+    }
+  }
+}

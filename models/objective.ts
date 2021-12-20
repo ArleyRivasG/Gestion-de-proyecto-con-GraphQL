@@ -1,6 +1,8 @@
+// don´t use this model on projects
+
 import { Schema, model } from "mongoose";
 import { Enum_TipoObjetivo } from "./enums";
-import { ProjectModel } from "./project2";
+
 
 interface objetivo{
     descripcion: string;

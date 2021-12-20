@@ -10,13 +10,13 @@ const resolvers = {
             const usuarios = await UserModel.find();
             return usuarios;
         },
-        Usuario: async (parant, args)=>{
-            const usuario = await UserModel.findOne({_id: args._id});        
+        Usuario: async (parant, args) => {
+            const usuario = await UserModel.findOne({ _id: args._id });
             return usuario;
         },
         // paso 3 proyecto
-        Proyectos: async (parent, args)=>{
-            const proyectos= await ProjectModel.find();
+        Proyectos: async (parent, args) => {
+            const proyectos = await ProjectModel.find().populate('lider');
             return proyectos;
         }
 
@@ -38,12 +38,12 @@ const resolvers = {
             if (Object.keys(args).includes('estado')) {
                 usuarioCreado.estado = args.estado;
             }
-            return usuarioCreado; 
+            return usuarioCreado;
         },
 
         //mutacion para editar usuario
         editarUsuario: async (parent, args) => {
-            const usuarioEditado = await UserModel.findByIdAndUpdate(args._id,{
+            const usuarioEditado = await UserModel.findByIdAndUpdate(args._id, {
                 nombre: args.nombre,
                 apellido: args.apellido,
                 identificacion: args.identificacion,
@@ -67,6 +67,21 @@ const resolvers = {
             }
 
         },
+        crearProyecto: async (parent, args) =>{
+            const proyectoCreado = await ProjectModel.create({
+                nombre: args.nombre,
+                presupuesto: args.presupuesto,
+                fechaInicio: args.fechaInicio,
+                fechaFin: args.fechaFin,
+                estado: args.estado,
+                fase: args.fase,
+                lider: args.lider,
+                objetivos:[{descripcion: ' este es el objetivo general' , tipo:'GENERAL'}]
+
+
+            });
+            return proyectoCreado;
+        }
     },
 
 };
