@@ -80,7 +80,7 @@ mutation EliminarUsuario {
   }
 }
 
-
+# mutacion con proyectos quemados en el resolver
 mutation  {
   crearProyecto (
     nombre: "Proyecto GQL 2"
@@ -98,5 +98,48 @@ mutation  {
       nombre
       apellido
     }
+  }
+}
+
+# mutacion con proyectos
+mutation{
+  crearProyecto(
+    nombre: "Proyecto con objetivos "
+    estado: ACTIVO
+    fase: INICIADO
+    fechaInicio: "2021/08/01"
+    fechaFin: "2021/12/01"
+    presupuesto: 5000000
+    lider: "61bc239edb1382733886ad24"
+    objetivos: [
+      {
+        descripcion: "Objetivo general del proyecto "
+        tipo: GENERAL
+      },
+      {
+        descripcion: "Objetivo especifico 1 del proyecto "
+        tipo: ESPECIFICO
+      },
+      {
+        descripcion: "Objetivo especifico 2 del proyecto "
+        tipo: ESPECIFICO
+      },
+      {
+        descripcion: "Objetivo especifico 3 del proyecto "
+        tipo: ESPECIFICO
+      }
+
+      }
+    ]
+  ){
+    _id
+    nombre
+    objetivos{
+      _id
+      descripcion
+      tipo
+    }
+
+
   }
 }

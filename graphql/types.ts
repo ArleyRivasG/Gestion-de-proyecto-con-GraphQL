@@ -48,11 +48,19 @@ type Usuario{ #el ! es para campos required
  }
 
 # paso 1 Proyecto
-type objetivos{
+type objetivo{
     _id: ID!
     descripcion:String!
     tipo:Enum_TipoObjetivo!
 }
+
+# creamos un input para poder mandarlo como tipo de entrada a objetivo:[]
+# Los type se utilizan para las respuestas (querys) y los input para poner entradas a los resolver
+input crearObjetivo{
+    descripcion: String!
+    tipo: Enum_TipoObjetivo!
+}
+
 type Proyecto {
     _id: ID!
     nombre: String!
@@ -62,7 +70,7 @@ type Proyecto {
     estado: Enum_EstadoProyecto!
     fase: Enum_FaseProyecto!
     lider: Usuario!
-    objetivos:[objetivos]
+    objetivos:[objetivo]
 }
 #Definimos los tipos de los Querys de las mutaciones  
  type Query{
@@ -108,7 +116,7 @@ type Proyecto {
         # El String hace referencia al ID  de un usuario que 
         # ya debe estar creado y el mongoose lo vuelte al ObjectID de Usuario
          lider:String!
-        #  objetivos:String
+         objetivos:[crearObjetivo]
      ):Proyecto
 
     
